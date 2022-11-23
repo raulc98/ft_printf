@@ -6,19 +6,16 @@
 /*   By: rcabrero <rcabrero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:12:53 by rcabrero          #+#    #+#             */
-/*   Updated: 2022/11/23 16:21:43 by rcabrero         ###   ########.fr       */
+/*   Updated: 2022/11/23 20:29:25 by rcabrero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>//TODO: BORRAR ESTA LIBRERIA
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
 
-void	ft_switchTypes(char c,va_list args);
-void	ft_printf_char(int c);
-void	ft_printf_string(char *s);
+#include "Library/ft_printf.h"
+#include "Library/libft.h"
+
 
 int	ft_printf(char const * str, ...)
 {
@@ -51,11 +48,14 @@ int	ft_printf(char const * str, ...)
 //necesito pasar la posicion y la siguiente posicion del string
 void ft_switchTypes(char c,va_list args)
 {
-	if(c == 'c') //c
+	if(c == 'c') //Char
 		ft_printf_char(va_arg(args,int));
-	if (c == 's')
+	if (c == 's') //String
 		ft_printf_string(va_arg(args,char *));
-
+	/*
+	if(c == 'd')
+		ft_printf_float(va_arg(args,double));
+	*/
 }
 
 void	ft_printf_char(int c)
@@ -77,7 +77,7 @@ void	ft_printf_string(char *s)
 
 int	main (void)
 {
-	ft_printf("HOLA QUE%c TAL%s\n",'S',"  HOLA");
+	printf("HOLA QUE%c TAL%d\n",'S',334);
 	//printf("HOLA QUE%c TAL%s",'`',"HOLA");
 	//printf("hola%cHola", "OsaS");
 	//printf("\n");
