@@ -1,48 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_decimal.c                                :+:      :+:    :+:   */
+/*   ft_printf_number.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcabrero <rcabrero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:45:18 by rcabrero          #+#    #+#             */
-/*   Updated: 2022/11/23 20:27:58 by rcabrero         ###   ########.fr       */
+/*   Updated: 2022/11/30 22:16:40 by rcabrero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Library/ft_printf.h"
-#include "Library/libft.h"
+#include "ft_printf.h"
 
-void	ft_printf_float(double d)
+int	ft_printf_number(int n)
 {
 	char	*buffer;
-	size_t	len;
+	//size_t	len; //TODO: TEMPORAL...
 	int		i;
 
-	len = doubleLen(d);
-	//TODO: llamar memcpy...
-	//ft_memcpy(buffer,d,len ++);
 	i = 0;
+	buffer = ft_itoa(n);
 	while (buffer[i] != '\0')
 	{
 		write(1,&buffer[i],1);
 		i++;
 	}
+	free(buffer);
+	return (i);
 }
 
-size_t	doubleLen(double d)
+int	ft_printf_unsigned(int n)
 {
-	size_t len;
-	double aux;
-
-	aux = d;
-	len = 0;
-	//primero llamamos a...
-	while(d / 10 != 0)
+	int	i;
+	//primero comprobamos que el numero sea positivo
+	if (n >= 0)
+		i = ft_printf_number(n);
+	else
 	{
-		aux = aux * 10;
-		len ++;
+		i = ft_printf_number((int)&n);
 	}
-	return len;
+	return (i);
 }
 
+int	ft_printf_pointer(int n)
+{
+	int	i;
+	
+	i = ft_print_hex((int)&n,'x');
+	return (i);
+}

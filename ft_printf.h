@@ -6,7 +6,7 @@
 /*   By: rcabrero <rcabrero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:51:47 by rcabrero          #+#    #+#             */
-/*   Updated: 2022/11/23 20:12:28 by rcabrero         ###   ########.fr       */
+/*   Updated: 2022/11/30 21:55:38 by rcabrero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,21 @@
 
 //FUNCIONES DEL FT_PRINTF PRINCIPAL
 int		ft_printf(char const * str, ...);
-void	ft_switchTypes(char c,va_list args);
-void	ft_printf_char(int c);
-void	ft_printf_string(char *s);
+int		ft_switchTypes(char c,va_list args);
+int		ft_printf_char(int c);
+int		ft_printf_string(char *s);
 
-//FUNCIONES DE FT_PRINTF_DECIMAL
+//ITOA
+char	*ft_itoa(int n);
+//PUTCHAR_FD
+void	ft_putchar_fd(char c, int fd);
 
-void	ft_printf_float(double d);
-size_t	doubleLen(double d);
+//FT_PRINTF_NUMBER
+int		ft_printf_number(int n);
+int		ft_printf_unsigned(int n);
+int		ft_printf_pointer(int n);
+
+//FUNCIONES DE HEXADECIMAL
+int		ft_print_hex(unsigned int num, const char format);
 
 #endif
