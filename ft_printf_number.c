@@ -6,13 +6,14 @@
 /*   By: rcabrero <rcabrero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:45:18 by rcabrero          #+#    #+#             */
-/*   Updated: 2022/11/30 22:16:40 by rcabrero         ###   ########.fr       */
+/*   Updated: 2022/12/07 15:02:42 by rcabrero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
-int	ft_printf_number(int n)
+int	ft_printf_number(long int n)
 {
 	char	*buffer;
 	//size_t	len; //TODO: TEMPORAL...
@@ -31,21 +32,49 @@ int	ft_printf_number(int n)
 
 int	ft_printf_unsigned(int n)
 {
-	int	i;
-	//primero comprobamos que el numero sea positivo
+	long int	i;
 	if (n >= 0)
 		i = ft_printf_number(n);
 	else
 	{
-		i = ft_printf_number((int)&n);
+		printf("N es igual a: %i\n",n);
+		i = n * -1;
+		printf("x es igual a: %li\n",i);
+		//char *prueba = (char *)i;
+		printf("N es igual a: %li\n",i);
+		ft_uitoa(n);
 	}
 	return (i);
 }
 
-int	ft_printf_pointer(int n)
+char	*ft_uitoa(unsigned long int n)
 {
-	int	i;
-	
-	i = ft_print_hex((int)&n,'x');
-	return (i);
+	char	*num;
+	int		len;
+
+	len = ft_num_len(n);
+	num = (char *)malloc(sizeof(char) * (len + 1));
+	if (!num)
+		return (0);
+	num[len] = '\0';
+	while (n != 0)
+	{
+		num[len - 1] = n % 10 + 48;
+		n = n / 10;
+		len--;
+	}
+	return (num);
+}
+
+int	ft_num_len(unsigned	int num)
+{
+	int	len;
+
+	len = 0;
+	while (num != 0)
+	{
+		len++;
+		num = num / 10;
+	}
+	return (len);
 }
