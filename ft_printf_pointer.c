@@ -6,13 +6,13 @@
 /*   By: rcabrero <rcabrero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 12:32:03 by rcabrero          #+#    #+#             */
-/*   Updated: 2022/12/07 14:41:49 by rcabrero         ###   ########.fr       */
+/*   Updated: 2022/12/29 14:17:57 by rcabrero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		pointer_len(uintptr_t n)
+int	pointer_len(uintptr_t n)
 {
 	int	i;
 
@@ -20,7 +20,7 @@ int		pointer_len(uintptr_t n)
 	while (n != 0)
 	{
 		i ++;
-		n = n/16;
+		n = n / 16;
 	}
 	return (i);
 }
@@ -29,26 +29,26 @@ void	ft_printf_ptr(uintptr_t n)
 {
 	if (n >= 16)
 	{
-		ft_printf_ptr(n/16);
-		ft_printf_ptr(n%16);
+		ft_printf_ptr(n / 16);
+		ft_printf_ptr(n % 16);
 	}
 	else
 	{
 		if (n <= 9)
-			ft_putchar_fd((n + '0'),1);
+			ft_putchar_fd((n + '0'), 1);
 		else
-			ft_putchar_fd((n - 10 + 'a'),1);
+			ft_putchar_fd((n - 10 + 'a'), 1);
 	}
 }
 
-int	ft_printf_pointer(unsigned long long n) //TODO: Deberia poder ser long long???
+int	ft_printf_pointer(unsigned long long n)
 {
 	int	i;
 
 	i = 0;
-	i += write(1,"0x",2); //Todas las direcciones de memoria empiezan asi.	
+	i += write(1, "0x", 2);
 	if (n == 0)
-		i += write (1,"0",1);
+		i += write (1, "0", 1);
 	else
 	{
 		ft_printf_ptr(n);

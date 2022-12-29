@@ -6,7 +6,7 @@
 /*   By: rcabrero <rcabrero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:45:18 by rcabrero          #+#    #+#             */
-/*   Updated: 2022/12/07 15:02:42 by rcabrero         ###   ########.fr       */
+/*   Updated: 2022/12/29 14:15:54 by rcabrero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,34 @@
 int	ft_printf_number(long int n)
 {
 	char	*buffer;
-	//size_t	len; //TODO: TEMPORAL...
 	int		i;
 
 	i = 0;
 	buffer = ft_itoa(n);
 	while (buffer[i] != '\0')
 	{
-		write(1,&buffer[i],1);
+		write(1, &buffer[i], 1);
 		i++;
 	}
-	free(buffer);
+	free (buffer);
 	return (i);
 }
 
-int	ft_printf_unsigned(int n)
+int	ft_printf_unsigned(unsigned int n)
 {
-	long int	i;
-	if (n >= 0)
-		i = ft_printf_number(n);
+	int		print_length;
+	char	*temp;
+
+	print_length = 0;
+	if (n == 0)
+		print_length += write(1, "0", 1);
 	else
 	{
-		printf("N es igual a: %i\n",n);
-		i = n * -1;
-		printf("x es igual a: %li\n",i);
-		//char *prueba = (char *)i;
-		printf("N es igual a: %li\n",i);
-		ft_uitoa(n);
+		temp = ft_uitoa(n);
+		print_length += ft_printf_string(temp);
+		free(temp);
 	}
-	return (i);
+	return (print_length);
 }
 
 char	*ft_uitoa(unsigned long int n)
